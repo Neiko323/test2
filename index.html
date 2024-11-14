@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Site de Vidéos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .navbar button:hover {
+            background-color: #45a049;
+        }
+        .navbar input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            margin: 5px;
+        }
+        #videos-section {
+            display: block;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <button id="login-btn" onclick="showLogin()">Connexion</button>
+        <button id="admin-btn" onclick="location.href='admin.html'">Admin</button>
+        <input type="text" id="search-bar" placeholder="Rechercher...">
+    </div>
+
+    <div id="videos-section">
+        <h2>Vidéos</h2>
+        <div>
+            <!-- Exemple de vidéo -->
+            <div><h3>Vidéo 1</h3></div>
+            <div><h3>Vidéo 2</h3></div>
+        </div>
+    </div>
+
+    <div id="login-form">
+        <h2>Se connecter</h2>
+        <form onsubmit="return loginUser()">
+            <input type="email" id="email-login" placeholder="Email" required>
+            <input type="password" id="password-login" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+        <p>Pas encore de compte ? <a href="register.html">Créer un compte</a></p>
+    </div>
+
+    <script>
+        function showLogin() {
+            document.getElementById("login-form").style.display = "block";
+        }
+
+        function loginUser() {
+            let email = document.getElementById("email-login").value;
+            const password = document.getElementById("password-login").value;
+
+            // Assurez-vous que l'email se termine par "gmail.com"
+            if (!email.endsWith("@gmail.com")) {
+                email += "@gmail.com";
+                document.getElementById("email-login").value = email;
+            }
+
+            let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+            const user = accounts.find(acc => acc.email === email);
+
+            if (user && user.password === password) {
+                localStorage.setItem("email", email);
+                alert("Bienvenue, " + email);
+                location.reload(); // Recharge la page pour cacher le bouton de connexion
+                return false;
+            } else {
+                alert("Email ou mot de passe incorrect");
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

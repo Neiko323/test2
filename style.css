@@ -1,0 +1,54 @@
+/* Barre de navigation */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 5px;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
+}
+
+#login-button-container {
+    display: block; /* Assurez-vous que le bouton de connexion est visible si non connecté */
+}
+
+#logout-button {
+    display: none; /* Cacher le bouton de déconnexion si l'utilisateur n'est pas connecté */
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#logout-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Section des vidéos */
+.video-section {
+    padding: 20px;
+}
+
+.video-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.video-item {
+    margin: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+video {
+    max-width: 100%;
+}

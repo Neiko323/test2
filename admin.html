@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Mon Site de Vidéos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Liste des comptes créés</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Mot de passe</th>
+            </tr>
+        </thead>
+        <tbody id="accounts-table-body">
+            <!-- Liste des comptes sera insérée ici -->
+        </tbody>
+    </table>
+
+    <script>
+        // Vérifier si l'utilisateur est autorisé à accéder à la page admin
+        const username = localStorage.getItem("email");
+        if (username !== "neiko@gmail.com") {
+            alert("Accès refusé. Vous n'avez pas les droits nécessaires.");
+            window.location.href = "index.html";
+        }
+
+        // Afficher les utilisateurs
+        const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+        const tableBody = document.getElementById("accounts-table-body");
+
+        accounts.forEach(account => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${account.email}</td><td>${account.password}</td>`;
+            tableBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>

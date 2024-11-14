@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+        /* Style similaire à index.html */
+        body { font-family: Arial, sans-serif; }
+        .login-form { padding: 20px; }
+        input { padding: 10px; width: 100%; margin-bottom: 10px; }
+        button { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="login-form">
+        <h2>Se connecter</h2>
+        <form onsubmit="return loginUser()">
+            <input type="email" id="email-login" placeholder="Email" required>
+            <input type="password" id="password-login" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+        <p>Pas encore de compte ? <a href="register.html">Créer un compte</a></p>
+    </div>
+
+    <script>
+        function loginUser() {
+            let email = document.getElementById("email-login").value;
+            const password = document.getElementById("password-login").value;
+
+            // Assurez-vous que l'email se termine par "gmail.com"
+            if (!email.endsWith("@gmail.com")) {
+                email += "@gmail.com";
+                document.getElementById("email-login").value = email;
+            }
+
+            let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+            const user = accounts.find(acc => acc.email === email);
+
+            if (user && user.password === password) {
+                localStorage.setItem("email", email);
+                alert("Bienvenue, " + email);
+                window.location.href = "index.html"; // Redirige vers la page principale
+                return false;
+            } else {
+                alert("Email ou mot de passe incorrect");
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
